@@ -1,0 +1,48 @@
+@mixin wh( $size ) {
+  @if length( $size ) == 1 {
+    $height: $size;
+    $width: $size;
+  } @else {
+    $height: nth($size, 2);
+    $width: nth($size, 1);
+  }
+
+  @if $height != auto {
+    height: $height;
+  }
+
+  width: $width;
+}
+
+@mixin screen( $position ) {
+  @if length( $position ) == 1 {
+    position: $position;
+  } @else if length( $position ) > 1 {
+    position: nth($position, 1);
+
+    $direction: top, right, bottom, left;
+    @for $index from 2 through length( $position ) {
+      @if nth($position, $index) != auto {
+        #{nth($direction, $index - 1)}: nth($position, $index);
+      }
+    }
+  }
+}
+
+@mixin box( $size, $block: block, $position: auto, $z-index: auto) {
+  @include wh( $size );
+
+  @if $position != auto {
+    @include screen( $position );
+  }
+
+  @if $z-index != auto {
+    z-index: $z-index;
+  }
+
+  display: $block;
+}
+
+// .example-box {
+//   @include box(16px, block, absolute auto auto 100px 20px, 2);
+// }

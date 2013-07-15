@@ -1,0 +1,57 @@
+@mixin sprite( $size, $position, $image: '../images/sprite.png', $repeat: no-repeat ) {
+  @include wh( $size );
+
+  @if length( $position ) == 1 {
+    background-position: $position $position;
+  } @else {
+    background-position: nth($position, 1) nth($position, 2);
+  }
+
+  background-image: url('#{$image}');
+  background-repeat: $repeat;
+  display: inline-block;
+}
+
+@mixin sprite-set( $names, $size, $position, $image, $direction: x ) {
+  $bug_limiter: auto;
+
+  @for $index from 1 through length( $names ) {
+    @if $index != 1 {
+      @if length( $position ) == 1 {
+        $x: $position;
+        $y: $position;
+      } @else {
+        $x: nth($position, 1);
+        $y: nth($position, 2);
+      }
+
+      @if $bug_limiter == auto {
+        @if $direction == x {
+          $bug_limiter: - + $x;
+        } @else {
+          $bug_limiter: - + $y;
+        }
+      }
+
+      @if $direction == x {
+        $x: $bug_limiter + (($index - 1) * nth($size, 1));
+      } @else {
+        $y: $bug_limiter + (($index - 1) * nth($size, 2));
+      }
+
+      $position: $x $y;
+    }
+
+    &-#{nth($names, $index)}  {
+      @include sprite( $size, $position, $image );
+    }
+  }
+}
+
+// .icon {
+//   @include sprite-set(twitter facebook gmail, 16px, 0, '../images/social-icons.png', y);
+// }
+
+// .example-img {
+//   @include sprite(16px, 0 0);
+// }

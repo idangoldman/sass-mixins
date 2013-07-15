@@ -1,0 +1,55 @@
+@mixin form( $background, $color, $width, $height, $border, $margin, $padding, $fonts ) {
+  fieldset {
+    margin: $margin;
+  }
+
+  label, input, select, textarea {
+    display: inline-block;
+    vertical-align: middle;
+  }
+
+  input[type="text"], select, textarea {
+    background-color: $background;
+    border: $border;
+    color: $color;
+    font: $fonts;
+    padding: $padding;
+    width: $width;
+  }
+
+  select {
+    width: $width + 5;
+  }
+
+  textarea {
+    height: $height;
+  }
+
+  label {
+    width: $width / 2;
+  }
+
+  label, input[type="submit"] {
+    cursor: pointer;
+  }
+
+  .vertical-top {
+    vertical-align: top;
+  }
+
+  .none {
+    display: none;
+  }
+}
+
+// form {
+//   @include form(
+//     $background: transparent;
+//     $width: 200px,
+//     $height: 100px,
+//     $border: 1px solid #000,
+//     $margin: 0 0 10px 0,
+//     $padding: 2px 3px,
+//     $fonts: normal 12px tahoma
+//   );
+// }

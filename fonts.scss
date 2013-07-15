@@ -1,0 +1,20 @@
+@mixin google-fonts( $names, $options ) {
+  $fonts: '';
+  $url: '//fonts.googleapis.com/css?family=';
+
+  @if length( $options ) >= 1 {
+    $options: ':' + $options;
+  }
+
+  @each $name in $names {
+    @if $fonts == '' {
+      $fonts: $name + $options;
+    } @else {
+      $fonts: $fonts + '|' + $name + $options;
+    }
+  }
+
+  @import $url + $fonts;
+}
+
+// @include google-fonts(('PT+Sans+Caption', 'Fauna+One', 'Kite+One', 'Inconsolata'));
