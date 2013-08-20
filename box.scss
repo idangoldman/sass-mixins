@@ -1,17 +1,14 @@
 @mixin wh( $size ) {
   @if length( $size ) == 1 {
-    $height: $size;
-    $width: $size;
+    height: $size;
+    width: $size;
   } @else {
-    $height: nth($size, 2);
-    $width: nth($size, 1);
+    @if nth($size, 2) != auto {
+      height: nth($size, 2);
+    }
+    
+    width: nth($size, 1);
   }
-
-  @if $height != auto {
-    height: $height;
-  }
-
-  width: $width;
 }
 
 @mixin screen( $position ) {
