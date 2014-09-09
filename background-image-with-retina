@@ -1,0 +1,14 @@
+@mixin background-image-with-retina($image-name, $extension: png) {
+    background-image: url('#{$imagePath}/#{$image-name}.#{$extension}');
+
+    $resolutions: 1.25 120dppx,
+        1.3 124.8dppx,
+        1.5 144dppx,
+        2 192dppx;
+
+    @each $resolution in $resolutions {
+        @media (-webkit-min-device-pixel-ratio: nth($resolution, 1)), (min-resolution: nth($resolution, 2)) {
+            background-image: url('#{$imagePath}/#{$image-name}@2x.#{$extension}');
+        }
+    }
+}
