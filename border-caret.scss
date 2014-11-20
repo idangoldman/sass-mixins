@@ -1,0 +1,13 @@
+@mixin border-caret($direction: top, $size: 5px, $color: #000) {
+    @if $direction == top or $direction == bottom {
+        border-left: $size solid transparent;
+        border-right: $size solid transparent;
+    } @else {
+        border-bottom: $size solid transparent;
+        border-top: $size solid transparent;
+    }
+
+    border-#{$direction}: $size solid $color;
+    height: 0;
+    width: 0;
+}
